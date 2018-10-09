@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.directional.base.mapper.UserComplaintContentMapper" >
+  <resultMap id="BaseResultMap" type="com.directional.base.entity.UserComplaintContent" >
+    <id column="user_complaint_content_id" property="userComplaintContentId" jdbcType="BIGINT" />
+    <result column="user_complaint_id" property="userComplaintId" jdbcType="BIGINT" />
+    <result column="manage_admin_user_id" property="manageAdminUserId" jdbcType="BIGINT" />
+    <result column="order_info_id" property="orderInfoId" jdbcType="VARCHAR" />
+    <result column="complaint_content" property="complaintContent" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_complaint_content_id, user_complaint_id, manage_admin_user_id, order_info_id, 
+    complaint_content, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_complaint_content
+    where user_complaint_content_id = #{userComplaintContentId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_complaint_content
+    where user_complaint_content_id = #{userComplaintContentId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.directional.base.entity.UserComplaintContent" useGeneratedKeys="true" keyProperty="userComplaintContentId" >
+    insert into user_complaint_content (user_complaint_id, manage_admin_user_id, 
+      order_info_id, complaint_content, create_time
+      )
+    values (#{userComplaintId,jdbcType=BIGINT}, #{manageAdminUserId,jdbcType=BIGINT}, 
+      #{orderInfoId,jdbcType=VARCHAR}, #{complaintContent,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.directional.base.entity.UserComplaintContent" useGeneratedKeys="true" keyProperty="userComplaintContentId" >
+    insert into user_complaint_content
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      user_complaint_id,
+      manage_admin_user_id,
+      order_info_id,
+      complaint_content,
+      create_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{userComplaintId,jdbcType=BIGINT},
+      #{manageAdminUserId,jdbcType=BIGINT},
+      #{orderInfoId,jdbcType=VARCHAR},
+      #{complaintContent,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.directional.base.entity.UserComplaintContent" >
+    update user_complaint_content
+    <set >
+      <if test="userComplaintId != null" >
+        user_complaint_id = #{userComplaintId,jdbcType=BIGINT},
+      </if>
+      <if test="manageAdminUserId != null" >
+        manage_admin_user_id = #{manageAdminUserId,jdbcType=BIGINT},
+      </if>
+      <if test="orderInfoId != null" >
+        order_info_id = #{orderInfoId,jdbcType=VARCHAR},
+      </if>
+      <if test="complaintContent != null" >
+        complaint_content = #{complaintContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_complaint_content_id = #{userComplaintContentId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.directional.base.entity.UserComplaintContent" >
+    update user_complaint_content
+    set user_complaint_id = #{userComplaintId,jdbcType=BIGINT},
+      manage_admin_user_id = #{manageAdminUserId,jdbcType=BIGINT},
+      order_info_id = #{orderInfoId,jdbcType=VARCHAR},
+      complaint_content = #{complaintContent,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where user_complaint_content_id = #{userComplaintContentId,jdbcType=BIGINT}
+  </update>
+</mapper>

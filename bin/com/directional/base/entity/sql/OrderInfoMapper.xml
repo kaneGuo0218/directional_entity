@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.directional.base.mapper.OrderInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.directional.base.entity.OrderInfo" >
+    <id column="order_info_id" property="orderInfoId" jdbcType="VARCHAR" />
+    <result column="user_mobile" property="userMobile" jdbcType="VARCHAR" />
+    <result column="channel_product_code_id" property="channelProductCodeId" jdbcType="BIGINT" />
+    <result column="channel_info_id" property="channelInfoId" jdbcType="BIGINT" />
+    <result column="config_type_id" property="configTypeId" jdbcType="BIGINT" />
+    <result column="order_time" property="orderTime" jdbcType="TIMESTAMP" />
+    <result column="order_payvalid_time" property="orderPayvalidTime" jdbcType="TIMESTAMP" />
+    <result column="order_pay_time" property="orderPayTime" jdbcType="TIMESTAMP" />
+    <result column="order_valid_time" property="orderValidTime" jdbcType="TIMESTAMP" />
+    <result column="user_province" property="userProvince" jdbcType="VARCHAR" />
+    <result column="order_type" property="orderType" jdbcType="INTEGER" />
+    <result column="order_state" property="orderState" jdbcType="INTEGER" />
+    <result column="order_fee" property="orderFee" jdbcType="DECIMAL" />
+    <result column="real_fee" property="realFee" jdbcType="DECIMAL" />
+    <result column="refund_type" property="refundType" jdbcType="INTEGER" />
+    <result column="refund_fee" property="refundFee" jdbcType="DECIMAL" />
+    <result column="order_search" property="orderSearch" jdbcType="VARCHAR" />
+    <result column="order_json" property="orderJson" jdbcType="VARCHAR" />
+    <result column="order_by_type" property="orderByType" jdbcType="INTEGER" />
+    <result column="unicomOrderId" property="unicomorderid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_info_id, user_mobile, channel_product_code_id, channel_info_id, config_type_id, 
+    order_time, order_payvalid_time, order_pay_time, order_valid_time, user_province, 
+    order_type, order_state, order_fee, real_fee, refund_type, refund_fee, order_search, 
+    order_json, order_by_type, unicomOrderId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_info
+    where order_info_id = #{orderInfoId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from order_info
+    where order_info_id = #{orderInfoId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.directional.base.entity.OrderInfo" >
+    insert into order_info (order_info_id, user_mobile, channel_product_code_id, 
+      channel_info_id, config_type_id, order_time, 
+      order_payvalid_time, order_pay_time, order_valid_time, 
+      user_province, order_type, order_state, 
+      order_fee, real_fee, refund_type, 
+      refund_fee, order_search, order_json, 
+      order_by_type, unicomOrderId)
+    values (#{orderInfoId,jdbcType=VARCHAR}, #{userMobile,jdbcType=VARCHAR}, #{channelProductCodeId,jdbcType=BIGINT}, 
+      #{channelInfoId,jdbcType=BIGINT}, #{configTypeId,jdbcType=BIGINT}, #{orderTime,jdbcType=TIMESTAMP}, 
+      #{orderPayvalidTime,jdbcType=TIMESTAMP}, #{orderPayTime,jdbcType=TIMESTAMP}, #{orderValidTime,jdbcType=TIMESTAMP}, 
+      #{userProvince,jdbcType=VARCHAR}, #{orderType,jdbcType=INTEGER}, #{orderState,jdbcType=INTEGER}, 
+      #{orderFee,jdbcType=DECIMAL}, #{realFee,jdbcType=DECIMAL}, #{refundType,jdbcType=INTEGER}, 
+      #{refundFee,jdbcType=DECIMAL}, #{orderSearch,jdbcType=VARCHAR}, #{orderJson,jdbcType=VARCHAR}, 
+      #{orderByType,jdbcType=INTEGER}, #{unicomorderid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.directional.base.entity.OrderInfo" >
+    insert into order_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      order_info_id,
+      user_mobile,
+      channel_product_code_id,
+      channel_info_id,
+      config_type_id,
+      order_time,
+      order_payvalid_time,
+      order_pay_time,
+      order_valid_time,
+      user_province,
+      order_type,
+      order_state,
+      order_fee,
+      real_fee,
+      refund_type,
+      refund_fee,
+      order_search,
+      order_json,
+      order_by_type,
+      unicomOrderId,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{orderInfoId,jdbcType=VARCHAR},
+      #{userMobile,jdbcType=VARCHAR},
+      #{channelProductCodeId,jdbcType=BIGINT},
+      #{channelInfoId,jdbcType=BIGINT},
+      #{configTypeId,jdbcType=BIGINT},
+      #{orderTime,jdbcType=TIMESTAMP},
+      #{orderPayvalidTime,jdbcType=TIMESTAMP},
+      #{orderPayTime,jdbcType=TIMESTAMP},
+      #{orderValidTime,jdbcType=TIMESTAMP},
+      #{userProvince,jdbcType=VARCHAR},
+      #{orderType,jdbcType=INTEGER},
+      #{orderState,jdbcType=INTEGER},
+      #{orderFee,jdbcType=DECIMAL},
+      #{realFee,jdbcType=DECIMAL},
+      #{refundType,jdbcType=INTEGER},
+      #{refundFee,jdbcType=DECIMAL},
+      #{orderSearch,jdbcType=VARCHAR},
+      #{orderJson,jdbcType=VARCHAR},
+      #{orderByType,jdbcType=INTEGER},
+      #{unicomorderid,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.directional.base.entity.OrderInfo" >
+    update order_info
+    <set >
+      <if test="userMobile != null" >
+        user_mobile = #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="channelProductCodeId != null" >
+        channel_product_code_id = #{channelProductCodeId,jdbcType=BIGINT},
+      </if>
+      <if test="channelInfoId != null" >
+        channel_info_id = #{channelInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="configTypeId != null" >
+        config_type_id = #{configTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="orderTime != null" >
+        order_time = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderPayvalidTime != null" >
+        order_payvalid_time = #{orderPayvalidTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderPayTime != null" >
+        order_pay_time = #{orderPayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderValidTime != null" >
+        order_valid_time = #{orderValidTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userProvince != null" >
+        user_province = #{userProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        order_type = #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="orderState != null" >
+        order_state = #{orderState,jdbcType=INTEGER},
+      </if>
+      <if test="orderFee != null" >
+        order_fee = #{orderFee,jdbcType=DECIMAL},
+      </if>
+      <if test="realFee != null" >
+        real_fee = #{realFee,jdbcType=DECIMAL},
+      </if>
+      <if test="refundType != null" >
+        refund_type = #{refundType,jdbcType=INTEGER},
+      </if>
+      <if test="refundFee != null" >
+        refund_fee = #{refundFee,jdbcType=DECIMAL},
+      </if>
+      <if test="orderSearch != null" >
+        order_search = #{orderSearch,jdbcType=VARCHAR},
+      </if>
+      <if test="orderJson != null" >
+        order_json = #{orderJson,jdbcType=VARCHAR},
+      </if>
+      <if test="orderByType != null" >
+        order_by_type = #{orderByType,jdbcType=INTEGER},
+      </if>
+      <if test="unicomorderid != null" >
+        unicomOrderId = #{unicomorderid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_info_id = #{orderInfoId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.directional.base.entity.OrderInfo" >
+    update order_info
+    set user_mobile = #{userMobile,jdbcType=VARCHAR},
+      channel_product_code_id = #{channelProductCodeId,jdbcType=BIGINT},
+      channel_info_id = #{channelInfoId,jdbcType=BIGINT},
+      config_type_id = #{configTypeId,jdbcType=BIGINT},
+      order_time = #{orderTime,jdbcType=TIMESTAMP},
+      order_payvalid_time = #{orderPayvalidTime,jdbcType=TIMESTAMP},
+      order_pay_time = #{orderPayTime,jdbcType=TIMESTAMP},
+      order_valid_time = #{orderValidTime,jdbcType=TIMESTAMP},
+      user_province = #{userProvince,jdbcType=VARCHAR},
+      order_type = #{orderType,jdbcType=INTEGER},
+      order_state = #{orderState,jdbcType=INTEGER},
+      order_fee = #{orderFee,jdbcType=DECIMAL},
+      real_fee = #{realFee,jdbcType=DECIMAL},
+      refund_type = #{refundType,jdbcType=INTEGER},
+      refund_fee = #{refundFee,jdbcType=DECIMAL},
+      order_search = #{orderSearch,jdbcType=VARCHAR},
+      order_json = #{orderJson,jdbcType=VARCHAR},
+      order_by_type = #{orderByType,jdbcType=INTEGER},
+      unicomOrderId = #{unicomorderid,jdbcType=VARCHAR}
+    where order_info_id = #{orderInfoId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.directional.base.mapper.UserInfoFlowMapper" >
+  <resultMap id="BaseResultMap" type="com.directional.base.entity.UserInfoFlow" >
+    <id column="order_info_id" property="orderInfoId" jdbcType="VARCHAR" />
+    <result column="used_flow" property="usedFlow" jdbcType="BIGINT" />
+    <result column="all_flow" property="allFlow" jdbcType="BIGINT" />
+    <result column="channel_product_code_id" property="channelProductCodeId" jdbcType="BIGINT" />
+    <result column="user_mobile" property="userMobile" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_info_id, used_flow, all_flow, channel_product_code_id, user_mobile, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_info_flow
+    where order_info_id = #{orderInfoId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user_info_flow
+    where order_info_id = #{orderInfoId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.directional.base.entity.UserInfoFlow" >
+    insert into user_info_flow (order_info_id, used_flow, all_flow, 
+      channel_product_code_id, user_mobile, create_time
+      )
+    values (#{orderInfoId,jdbcType=VARCHAR}, #{usedFlow,jdbcType=BIGINT}, #{allFlow,jdbcType=BIGINT}, 
+      #{channelProductCodeId,jdbcType=BIGINT}, #{userMobile,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.directional.base.entity.UserInfoFlow" >
+    insert into user_info_flow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      order_info_id,
+      used_flow,
+      all_flow,
+      channel_product_code_id,
+      user_mobile,
+      create_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{orderInfoId,jdbcType=VARCHAR},
+      #{usedFlow,jdbcType=BIGINT},
+      #{allFlow,jdbcType=BIGINT},
+      #{channelProductCodeId,jdbcType=BIGINT},
+      #{userMobile,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.directional.base.entity.UserInfoFlow" >
+    update user_info_flow
+    <set >
+      <if test="usedFlow != null" >
+        used_flow = #{usedFlow,jdbcType=BIGINT},
+      </if>
+      <if test="allFlow != null" >
+        all_flow = #{allFlow,jdbcType=BIGINT},
+      </if>
+      <if test="channelProductCodeId != null" >
+        channel_product_code_id = #{channelProductCodeId,jdbcType=BIGINT},
+      </if>
+      <if test="userMobile != null" >
+        user_mobile = #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where order_info_id = #{orderInfoId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.directional.base.entity.UserInfoFlow" >
+    update user_info_flow
+    set used_flow = #{usedFlow,jdbcType=BIGINT},
+      all_flow = #{allFlow,jdbcType=BIGINT},
+      channel_product_code_id = #{channelProductCodeId,jdbcType=BIGINT},
+      user_mobile = #{userMobile,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where order_info_id = #{orderInfoId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.directional.base.mapper.ManageAdminUserMapper" >
+  <resultMap id="BaseResultMap" type="com.directional.base.entity.ManageAdminUser" >
+    <id column="manage_admin_user_id" property="manageAdminUserId" jdbcType="BIGINT" />
+    <result column="admin_user_name" property="adminUserName" jdbcType="VARCHAR" />
+    <result column="admin_user_pwd" property="adminUserPwd" jdbcType="VARCHAR" />
+    <result column="parent_admin_user_id" property="parentAdminUserId" jdbcType="BIGINT" />
+    <result column="admin_user_email" property="adminUserEmail" jdbcType="VARCHAR" />
+    <result column="admin_user_mobile" property="adminUserMobile" jdbcType="VARCHAR" />
+    <result column="is_prohibit" property="isProhibit" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="admin_group_id" property="adminGroupId" jdbcType="INTEGER" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    manage_admin_user_id, admin_user_name, admin_user_pwd, parent_admin_user_id, admin_user_email, 
+    admin_user_mobile, is_prohibit, is_delete, admin_group_id, company_name, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from manage_admin_user
+    where manage_admin_user_id = #{manageAdminUserId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from manage_admin_user
+    where manage_admin_user_id = #{manageAdminUserId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.directional.base.entity.ManageAdminUser" useGeneratedKeys="true" keyProperty="manageAdminUserId" >
+    insert into manage_admin_user (admin_user_name, admin_user_pwd, parent_admin_user_id, 
+      admin_user_email, admin_user_mobile, is_prohibit, 
+      is_delete, admin_group_id, company_name, 
+      create_time)
+    values (#{adminUserName,jdbcType=VARCHAR}, #{adminUserPwd,jdbcType=VARCHAR}, #{parentAdminUserId,jdbcType=BIGINT}, 
+      #{adminUserEmail,jdbcType=VARCHAR}, #{adminUserMobile,jdbcType=VARCHAR}, #{isProhibit,jdbcType=INTEGER}, 
+      #{isDelete,jdbcType=INTEGER}, #{adminGroupId,jdbcType=INTEGER}, #{companyName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.directional.base.entity.ManageAdminUser" useGeneratedKeys="true" keyProperty="manageAdminUserId" >
+    insert into manage_admin_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      admin_user_name,
+      admin_user_pwd,
+      parent_admin_user_id,
+      admin_user_email,
+      admin_user_mobile,
+      is_prohibit,
+      is_delete,
+      admin_group_id,
+      company_name,
+      create_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{adminUserName,jdbcType=VARCHAR},
+      #{adminUserPwd,jdbcType=VARCHAR},
+      #{parentAdminUserId,jdbcType=BIGINT},
+      #{adminUserEmail,jdbcType=VARCHAR},
+      #{adminUserMobile,jdbcType=VARCHAR},
+      #{isProhibit,jdbcType=INTEGER},
+      #{isDelete,jdbcType=INTEGER},
+      #{adminGroupId,jdbcType=INTEGER},
+      #{companyName,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.directional.base.entity.ManageAdminUser" >
+    update manage_admin_user
+    <set >
+      <if test="adminUserName != null" >
+        admin_user_name = #{adminUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminUserPwd != null" >
+        admin_user_pwd = #{adminUserPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="parentAdminUserId != null" >
+        parent_admin_user_id = #{parentAdminUserId,jdbcType=BIGINT},
+      </if>
+      <if test="adminUserEmail != null" >
+        admin_user_email = #{adminUserEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="adminUserMobile != null" >
+        admin_user_mobile = #{adminUserMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="isProhibit != null" >
+        is_prohibit = #{isProhibit,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="adminGroupId != null" >
+        admin_group_id = #{adminGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where manage_admin_user_id = #{manageAdminUserId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.directional.base.entity.ManageAdminUser" >
+    update manage_admin_user
+    set admin_user_name = #{adminUserName,jdbcType=VARCHAR},
+      admin_user_pwd = #{adminUserPwd,jdbcType=VARCHAR},
+      parent_admin_user_id = #{parentAdminUserId,jdbcType=BIGINT},
+      admin_user_email = #{adminUserEmail,jdbcType=VARCHAR},
+      admin_user_mobile = #{adminUserMobile,jdbcType=VARCHAR},
+      is_prohibit = #{isProhibit,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      admin_group_id = #{adminGroupId,jdbcType=INTEGER},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where manage_admin_user_id = #{manageAdminUserId,jdbcType=BIGINT}
+  </update>
+</mapper>

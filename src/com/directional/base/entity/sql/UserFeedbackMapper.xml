@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.directional.base.mapper.UserFeedbackMapper" >
+  <resultMap id="BaseResultMap" type="com.directional.base.entity.UserFeedback" >
+    <id column="user_feedback_id" property="userFeedbackId" jdbcType="BIGINT" />
+    <result column="contect" property="contect" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_feedback_id, contect, content, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_feedback
+    where user_feedback_id = #{userFeedbackId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_feedback
+    where user_feedback_id = #{userFeedbackId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.directional.base.entity.UserFeedback" useGeneratedKeys="true" keyProperty="userFeedbackId" >
+    insert into user_feedback (contect, content, create_time
+      )
+    values (#{contect,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.directional.base.entity.UserFeedback" useGeneratedKeys="true" keyProperty="userFeedbackId" >
+    insert into user_feedback
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      contect,
+      content,
+      create_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{contect,jdbcType=VARCHAR},
+      #{content,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.directional.base.entity.UserFeedback" >
+    update user_feedback
+    <set >
+      <if test="contect != null" >
+        contect = #{contect,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_feedback_id = #{userFeedbackId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.directional.base.entity.UserFeedback" >
+    update user_feedback
+    set contect = #{contect,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where user_feedback_id = #{userFeedbackId,jdbcType=BIGINT}
+  </update>
+</mapper>

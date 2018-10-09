@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.directional.base.mapper.OrderAlipayLogMapper" >
+  <resultMap id="BaseResultMap" type="com.directional.base.entity.OrderAlipayLog" >
+    <id column="order_info_id" property="orderInfoId" jdbcType="VARCHAR" />
+    <result column="notify_time" property="notifyTime" jdbcType="TIMESTAMP" />
+    <result column="notify_type" property="notifyType" jdbcType="VARCHAR" />
+    <result column="notify_id" property="notifyId" jdbcType="VARCHAR" />
+    <result column="sign_type" property="signType" jdbcType="VARCHAR" />
+    <result column="sign" property="sign" jdbcType="VARCHAR" />
+    <result column="subject" property="subject" jdbcType="VARCHAR" />
+    <result column="payment_type" property="paymentType" jdbcType="VARCHAR" />
+    <result column="trade_no" property="tradeNo" jdbcType="VARCHAR" />
+    <result column="trade_status" property="tradeStatus" jdbcType="VARCHAR" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_payment" property="gmtPayment" jdbcType="TIMESTAMP" />
+    <result column="gmt_close" property="gmtClose" jdbcType="TIMESTAMP" />
+    <result column="refund_status" property="refundStatus" jdbcType="VARCHAR" />
+    <result column="gmt_refund" property="gmtRefund" jdbcType="TIMESTAMP" />
+    <result column="seller_email" property="sellerEmail" jdbcType="VARCHAR" />
+    <result column="buyer_email" property="buyerEmail" jdbcType="VARCHAR" />
+    <result column="seller_id" property="sellerId" jdbcType="VARCHAR" />
+    <result column="buyer_id" property="buyerId" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="total_fee" property="totalFee" jdbcType="DECIMAL" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="body" property="body" jdbcType="VARCHAR" />
+    <result column="discount" property="discount" jdbcType="DECIMAL" />
+    <result column="is_total_fee_adjust" property="isTotalFeeAdjust" jdbcType="VARCHAR" />
+    <result column="use_coupon" property="useCoupon" jdbcType="VARCHAR" />
+    <result column="extra_common_param" property="extraCommonParam" jdbcType="VARCHAR" />
+    <result column="business_scene" property="businessScene" jdbcType="VARCHAR" />
+    <result column="interface_type" property="interfaceType" jdbcType="VARCHAR" />
+    <result column="refund_no" property="refundNo" jdbcType="VARCHAR" />
+    <result column="refund_fee" property="refundFee" jdbcType="DECIMAL" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.directional.base.entity.OrderAlipayLogWithBLOBs" extends="BaseResultMap" >
+    <result column="order_json" property="orderJson" jdbcType="LONGVARCHAR" />
+    <result column="refund_json" property="refundJson" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_info_id, notify_time, notify_type, notify_id, sign_type, sign, subject, payment_type, 
+    trade_no, trade_status, gmt_create, gmt_payment, gmt_close, refund_status, gmt_refund, 
+    seller_email, buyer_email, seller_id, buyer_id, price, total_fee, quantity, body, 
+    discount, is_total_fee_adjust, use_coupon, extra_common_param, business_scene, interface_type, 
+    refund_no, refund_fee
+  </sql>
+  <sql id="Blob_Column_List" >
+    order_json, refund_json
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from order_alipay_log
+    where order_info_id = #{orderInfoId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from order_alipay_log
+    where order_info_id = #{orderInfoId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.directional.base.entity.OrderAlipayLogWithBLOBs" >
+    insert into order_alipay_log (order_info_id, notify_time, notify_type, 
+      notify_id, sign_type, sign, 
+      subject, payment_type, trade_no, 
+      trade_status, gmt_create, gmt_payment, 
+      gmt_close, refund_status, gmt_refund, 
+      seller_email, buyer_email, seller_id, 
+      buyer_id, price, total_fee, 
+      quantity, body, discount, 
+      is_total_fee_adjust, use_coupon, extra_common_param, 
+      business_scene, interface_type, refund_no, 
+      refund_fee, order_json, refund_json
+      )
+    values (#{orderInfoId,jdbcType=VARCHAR}, #{notifyTime,jdbcType=TIMESTAMP}, #{notifyType,jdbcType=VARCHAR}, 
+      #{notifyId,jdbcType=VARCHAR}, #{signType,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, 
+      #{subject,jdbcType=VARCHAR}, #{paymentType,jdbcType=VARCHAR}, #{tradeNo,jdbcType=VARCHAR}, 
+      #{tradeStatus,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtPayment,jdbcType=TIMESTAMP}, 
+      #{gmtClose,jdbcType=TIMESTAMP}, #{refundStatus,jdbcType=VARCHAR}, #{gmtRefund,jdbcType=TIMESTAMP}, 
+      #{sellerEmail,jdbcType=VARCHAR}, #{buyerEmail,jdbcType=VARCHAR}, #{sellerId,jdbcType=VARCHAR}, 
+      #{buyerId,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{totalFee,jdbcType=DECIMAL}, 
+      #{quantity,jdbcType=INTEGER}, #{body,jdbcType=VARCHAR}, #{discount,jdbcType=DECIMAL}, 
+      #{isTotalFeeAdjust,jdbcType=VARCHAR}, #{useCoupon,jdbcType=VARCHAR}, #{extraCommonParam,jdbcType=VARCHAR}, 
+      #{businessScene,jdbcType=VARCHAR}, #{interfaceType,jdbcType=VARCHAR}, #{refundNo,jdbcType=VARCHAR}, 
+      #{refundFee,jdbcType=DECIMAL}, #{orderJson,jdbcType=LONGVARCHAR}, #{refundJson,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.directional.base.entity.OrderAlipayLogWithBLOBs" >
+    insert into order_alipay_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      order_info_id,
+      notify_time,
+      notify_type,
+      notify_id,
+      sign_type,
+      sign,
+      subject,
+      payment_type,
+      trade_no,
+      trade_status,
+      gmt_create,
+      gmt_payment,
+      gmt_close,
+      refund_status,
+      gmt_refund,
+      seller_email,
+      buyer_email,
+      seller_id,
+      buyer_id,
+      price,
+      total_fee,
+      quantity,
+      body,
+      discount,
+      is_total_fee_adjust,
+      use_coupon,
+      extra_common_param,
+      business_scene,
+      interface_type,
+      refund_no,
+      refund_fee,
+      order_json,
+      refund_json,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{orderInfoId,jdbcType=VARCHAR},
+      #{notifyTime,jdbcType=TIMESTAMP},
+      #{notifyType,jdbcType=VARCHAR},
+      #{notifyId,jdbcType=VARCHAR},
+      #{signType,jdbcType=VARCHAR},
+      #{sign,jdbcType=VARCHAR},
+      #{subject,jdbcType=VARCHAR},
+      #{paymentType,jdbcType=VARCHAR},
+      #{tradeNo,jdbcType=VARCHAR},
+      #{tradeStatus,jdbcType=VARCHAR},
+      #{gmtCreate,jdbcType=TIMESTAMP},
+      #{gmtPayment,jdbcType=TIMESTAMP},
+      #{gmtClose,jdbcType=TIMESTAMP},
+      #{refundStatus,jdbcType=VARCHAR},
+      #{gmtRefund,jdbcType=TIMESTAMP},
+      #{sellerEmail,jdbcType=VARCHAR},
+      #{buyerEmail,jdbcType=VARCHAR},
+      #{sellerId,jdbcType=VARCHAR},
+      #{buyerId,jdbcType=VARCHAR},
+      #{price,jdbcType=DECIMAL},
+      #{totalFee,jdbcType=DECIMAL},
+      #{quantity,jdbcType=INTEGER},
+      #{body,jdbcType=VARCHAR},
+      #{discount,jdbcType=DECIMAL},
+      #{isTotalFeeAdjust,jdbcType=VARCHAR},
+      #{useCoupon,jdbcType=VARCHAR},
+      #{extraCommonParam,jdbcType=VARCHAR},
+      #{businessScene,jdbcType=VARCHAR},
+      #{interfaceType,jdbcType=VARCHAR},
+      #{refundNo,jdbcType=VARCHAR},
+      #{refundFee,jdbcType=DECIMAL},
+      #{orderJson,jdbcType=LONGVARCHAR},
+      #{refundJson,jdbcType=LONGVARCHAR},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.directional.base.entity.OrderAlipayLogWithBLOBs" >
+    update order_alipay_log
+    <set >
+      <if test="notifyTime != null" >
+        notify_time = #{notifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notifyType != null" >
+        notify_type = #{notifyType,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyId != null" >
+        notify_id = #{notifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="signType != null" >
+        sign_type = #{signType,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentType != null" >
+        payment_type = #{paymentType,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeNo != null" >
+        trade_no = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeStatus != null" >
+        trade_status = #{tradeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtPayment != null" >
+        gmt_payment = #{gmtPayment,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtClose != null" >
+        gmt_close = #{gmtClose,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundStatus != null" >
+        refund_status = #{refundStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtRefund != null" >
+        gmt_refund = #{gmtRefund,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sellerEmail != null" >
+        seller_email = #{sellerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerEmail != null" >
+        buyer_email = #{buyerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerId != null" >
+        seller_id = #{sellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerId != null" >
+        buyer_id = #{buyerId,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="totalFee != null" >
+        total_fee = #{totalFee,jdbcType=DECIMAL},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="body != null" >
+        body = #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="isTotalFeeAdjust != null" >
+        is_total_fee_adjust = #{isTotalFeeAdjust,jdbcType=VARCHAR},
+      </if>
+      <if test="useCoupon != null" >
+        use_coupon = #{useCoupon,jdbcType=VARCHAR},
+      </if>
+      <if test="extraCommonParam != null" >
+        extra_common_param = #{extraCommonParam,jdbcType=VARCHAR},
+      </if>
+      <if test="businessScene != null" >
+        business_scene = #{businessScene,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceType != null" >
+        interface_type = #{interfaceType,jdbcType=VARCHAR},
+      </if>
+      <if test="refundNo != null" >
+        refund_no = #{refundNo,jdbcType=VARCHAR},
+      </if>
+      <if test="refundFee != null" >
+        refund_fee = #{refundFee,jdbcType=DECIMAL},
+      </if>
+      <if test="orderJson != null" >
+        order_json = #{orderJson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="refundJson != null" >
+        refund_json = #{refundJson,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where order_info_id = #{orderInfoId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.directional.base.entity.OrderAlipayLogWithBLOBs" >
+    update order_alipay_log
+    set notify_time = #{notifyTime,jdbcType=TIMESTAMP},
+      notify_type = #{notifyType,jdbcType=VARCHAR},
+      notify_id = #{notifyId,jdbcType=VARCHAR},
+      sign_type = #{signType,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR},
+      payment_type = #{paymentType,jdbcType=VARCHAR},
+      trade_no = #{tradeNo,jdbcType=VARCHAR},
+      trade_status = #{tradeStatus,jdbcType=VARCHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_payment = #{gmtPayment,jdbcType=TIMESTAMP},
+      gmt_close = #{gmtClose,jdbcType=TIMESTAMP},
+      refund_status = #{refundStatus,jdbcType=VARCHAR},
+      gmt_refund = #{gmtRefund,jdbcType=TIMESTAMP},
+      seller_email = #{sellerEmail,jdbcType=VARCHAR},
+      buyer_email = #{buyerEmail,jdbcType=VARCHAR},
+      seller_id = #{sellerId,jdbcType=VARCHAR},
+      buyer_id = #{buyerId,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      total_fee = #{totalFee,jdbcType=DECIMAL},
+      quantity = #{quantity,jdbcType=INTEGER},
+      body = #{body,jdbcType=VARCHAR},
+      discount = #{discount,jdbcType=DECIMAL},
+      is_total_fee_adjust = #{isTotalFeeAdjust,jdbcType=VARCHAR},
+      use_coupon = #{useCoupon,jdbcType=VARCHAR},
+      extra_common_param = #{extraCommonParam,jdbcType=VARCHAR},
+      business_scene = #{businessScene,jdbcType=VARCHAR},
+      interface_type = #{interfaceType,jdbcType=VARCHAR},
+      refund_no = #{refundNo,jdbcType=VARCHAR},
+      refund_fee = #{refundFee,jdbcType=DECIMAL},
+      order_json = #{orderJson,jdbcType=LONGVARCHAR},
+      refund_json = #{refundJson,jdbcType=LONGVARCHAR}
+    where order_info_id = #{orderInfoId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.directional.base.entity.OrderAlipayLog" >
+    update order_alipay_log
+    set notify_time = #{notifyTime,jdbcType=TIMESTAMP},
+      notify_type = #{notifyType,jdbcType=VARCHAR},
+      notify_id = #{notifyId,jdbcType=VARCHAR},
+      sign_type = #{signType,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR},
+      payment_type = #{paymentType,jdbcType=VARCHAR},
+      trade_no = #{tradeNo,jdbcType=VARCHAR},
+      trade_status = #{tradeStatus,jdbcType=VARCHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_payment = #{gmtPayment,jdbcType=TIMESTAMP},
+      gmt_close = #{gmtClose,jdbcType=TIMESTAMP},
+      refund_status = #{refundStatus,jdbcType=VARCHAR},
+      gmt_refund = #{gmtRefund,jdbcType=TIMESTAMP},
+      seller_email = #{sellerEmail,jdbcType=VARCHAR},
+      buyer_email = #{buyerEmail,jdbcType=VARCHAR},
+      seller_id = #{sellerId,jdbcType=VARCHAR},
+      buyer_id = #{buyerId,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      total_fee = #{totalFee,jdbcType=DECIMAL},
+      quantity = #{quantity,jdbcType=INTEGER},
+      body = #{body,jdbcType=VARCHAR},
+      discount = #{discount,jdbcType=DECIMAL},
+      is_total_fee_adjust = #{isTotalFeeAdjust,jdbcType=VARCHAR},
+      use_coupon = #{useCoupon,jdbcType=VARCHAR},
+      extra_common_param = #{extraCommonParam,jdbcType=VARCHAR},
+      business_scene = #{businessScene,jdbcType=VARCHAR},
+      interface_type = #{interfaceType,jdbcType=VARCHAR},
+      refund_no = #{refundNo,jdbcType=VARCHAR},
+      refund_fee = #{refundFee,jdbcType=DECIMAL}
+    where order_info_id = #{orderInfoId,jdbcType=VARCHAR}
+  </update>
+</mapper>

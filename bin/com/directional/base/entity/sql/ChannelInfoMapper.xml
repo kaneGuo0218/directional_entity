@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.directional.base.mapper.ChannelInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.directional.base.entity.ChannelInfo" >
+    <id column="channel_info_id" property="channelInfoId" jdbcType="BIGINT" />
+    <result column="manage_admin_user_id" property="manageAdminUserId" jdbcType="BIGINT" />
+    <result column="dic_province_id" property="dicProvinceId" jdbcType="INTEGER" />
+    <result column="channel_info_name" property="channelInfoName" jdbcType="VARCHAR" />
+    <result column="channel_info_contect_name" property="channelInfoContectName" jdbcType="VARCHAR" />
+    <result column="contect_mobile" property="contectMobile" jdbcType="VARCHAR" />
+    <result column="contect_email" property="contectEmail" jdbcType="VARCHAR" />
+    <result column="is_used" property="isUsed" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    channel_info_id, manage_admin_user_id, dic_province_id, channel_info_name, channel_info_contect_name, 
+    contect_mobile, contect_email, is_used, is_delete, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from channel_info
+    where channel_info_id = #{channelInfoId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from channel_info
+    where channel_info_id = #{channelInfoId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.directional.base.entity.ChannelInfo" useGeneratedKeys="true" keyProperty="channelInfoId" >
+    insert into channel_info (manage_admin_user_id, dic_province_id, 
+      channel_info_name, channel_info_contect_name, 
+      contect_mobile, contect_email, is_used, 
+      is_delete, create_time)
+    values (#{manageAdminUserId,jdbcType=BIGINT}, #{dicProvinceId,jdbcType=INTEGER}, 
+      #{channelInfoName,jdbcType=VARCHAR}, #{channelInfoContectName,jdbcType=VARCHAR}, 
+      #{contectMobile,jdbcType=VARCHAR}, #{contectEmail,jdbcType=VARCHAR}, #{isUsed,jdbcType=INTEGER}, 
+      #{isDelete,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.directional.base.entity.ChannelInfo" useGeneratedKeys="true" keyProperty="channelInfoId" >
+    insert into channel_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      manage_admin_user_id,
+      dic_province_id,
+      channel_info_name,
+      channel_info_contect_name,
+      contect_mobile,
+      contect_email,
+      is_used,
+      is_delete,
+      create_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{manageAdminUserId,jdbcType=BIGINT},
+      #{dicProvinceId,jdbcType=INTEGER},
+      #{channelInfoName,jdbcType=VARCHAR},
+      #{channelInfoContectName,jdbcType=VARCHAR},
+      #{contectMobile,jdbcType=VARCHAR},
+      #{contectEmail,jdbcType=VARCHAR},
+      #{isUsed,jdbcType=INTEGER},
+      #{isDelete,jdbcType=INTEGER},
+      #{createTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.directional.base.entity.ChannelInfo" >
+    update channel_info
+    <set >
+      <if test="manageAdminUserId != null" >
+        manage_admin_user_id = #{manageAdminUserId,jdbcType=BIGINT},
+      </if>
+      <if test="dicProvinceId != null" >
+        dic_province_id = #{dicProvinceId,jdbcType=INTEGER},
+      </if>
+      <if test="channelInfoName != null" >
+        channel_info_name = #{channelInfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelInfoContectName != null" >
+        channel_info_contect_name = #{channelInfoContectName,jdbcType=VARCHAR},
+      </if>
+      <if test="contectMobile != null" >
+        contect_mobile = #{contectMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="contectEmail != null" >
+        contect_email = #{contectEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="isUsed != null" >
+        is_used = #{isUsed,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where channel_info_id = #{channelInfoId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.directional.base.entity.ChannelInfo" >
+    update channel_info
+    set manage_admin_user_id = #{manageAdminUserId,jdbcType=BIGINT},
+      dic_province_id = #{dicProvinceId,jdbcType=INTEGER},
+      channel_info_name = #{channelInfoName,jdbcType=VARCHAR},
+      channel_info_contect_name = #{channelInfoContectName,jdbcType=VARCHAR},
+      contect_mobile = #{contectMobile,jdbcType=VARCHAR},
+      contect_email = #{contectEmail,jdbcType=VARCHAR},
+      is_used = #{isUsed,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where channel_info_id = #{channelInfoId,jdbcType=BIGINT}
+  </update>
+</mapper>

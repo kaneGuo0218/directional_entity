@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.directional.base.mapper.DicProvinceMapper" >
+  <resultMap id="BaseResultMap" type="com.directional.base.entity.DicProvince" >
+    <id column="dic_province_id" property="dicProvinceId" jdbcType="INTEGER" />
+    <result column="province_name" property="provinceName" jdbcType="VARCHAR" />
+    <result column="dic_nationality_id" property="dicNationalityId" jdbcType="INTEGER" />
+    <result column="province_lat" property="provinceLat" jdbcType="DECIMAL" />
+    <result column="province_lng" property="provinceLng" jdbcType="DECIMAL" />
+    <result column="province_adcode" property="provinceAdcode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dic_province_id, province_name, dic_nationality_id, province_lat, province_lng, province_adcode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dic_province
+    where dic_province_id = #{dicProvinceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dic_province
+    where dic_province_id = #{dicProvinceId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.directional.base.entity.DicProvince" >
+    insert into dic_province (dic_province_id, province_name, dic_nationality_id, 
+      province_lat, province_lng, province_adcode
+      )
+    values (#{dicProvinceId,jdbcType=INTEGER}, #{provinceName,jdbcType=VARCHAR}, #{dicNationalityId,jdbcType=INTEGER}, 
+      #{provinceLat,jdbcType=DECIMAL}, #{provinceLng,jdbcType=DECIMAL}, #{provinceAdcode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.directional.base.entity.DicProvince" >
+    insert into dic_province
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      dic_province_id,
+      province_name,
+      dic_nationality_id,
+      province_lat,
+      province_lng,
+      province_adcode,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{dicProvinceId,jdbcType=INTEGER},
+      #{provinceName,jdbcType=VARCHAR},
+      #{dicNationalityId,jdbcType=INTEGER},
+      #{provinceLat,jdbcType=DECIMAL},
+      #{provinceLng,jdbcType=DECIMAL},
+      #{provinceAdcode,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.directional.base.entity.DicProvince" >
+    update dic_province
+    <set >
+      <if test="provinceName != null" >
+        province_name = #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="dicNationalityId != null" >
+        dic_nationality_id = #{dicNationalityId,jdbcType=INTEGER},
+      </if>
+      <if test="provinceLat != null" >
+        province_lat = #{provinceLat,jdbcType=DECIMAL},
+      </if>
+      <if test="provinceLng != null" >
+        province_lng = #{provinceLng,jdbcType=DECIMAL},
+      </if>
+      <if test="provinceAdcode != null" >
+        province_adcode = #{provinceAdcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dic_province_id = #{dicProvinceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.directional.base.entity.DicProvince" >
+    update dic_province
+    set province_name = #{provinceName,jdbcType=VARCHAR},
+      dic_nationality_id = #{dicNationalityId,jdbcType=INTEGER},
+      province_lat = #{provinceLat,jdbcType=DECIMAL},
+      province_lng = #{provinceLng,jdbcType=DECIMAL},
+      province_adcode = #{provinceAdcode,jdbcType=VARCHAR}
+    where dic_province_id = #{dicProvinceId,jdbcType=INTEGER}
+  </update>
+</mapper>

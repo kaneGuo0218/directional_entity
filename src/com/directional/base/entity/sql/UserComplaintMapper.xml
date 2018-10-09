@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.directional.base.mapper.UserComplaintMapper" >
+  <resultMap id="BaseResultMap" type="com.directional.base.entity.UserComplaint" >
+    <id column="user_complaint_id" property="userComplaintId" jdbcType="BIGINT" />
+    <result column="manage_admin_user_id" property="manageAdminUserId" jdbcType="BIGINT" />
+    <result column="order_info_id" property="orderInfoId" jdbcType="VARCHAR" />
+    <result column="config_type_id" property="configTypeId" jdbcType="BIGINT" />
+    <result column="channel_product_code_id" property="channelProductCodeId" jdbcType="BIGINT" />
+    <result column="channel_info_id" property="channelInfoId" jdbcType="BIGINT" />
+    <result column="complaint_state" property="complaintState" jdbcType="INTEGER" />
+    <result column="complaint_time" property="complaintTime" jdbcType="TIMESTAMP" />
+    <result column="deal_time" property="dealTime" jdbcType="TIMESTAMP" />
+    <result column="user_mobile" property="userMobile" jdbcType="VARCHAR" />
+    <result column="user_province" property="userProvince" jdbcType="VARCHAR" />
+    <result column="complaint_deal_state" property="complaintDealState" jdbcType="INTEGER" />
+    <result column="complaint_content" property="complaintContent" jdbcType="VARCHAR" />
+    <result column="complaint_search" property="complaintSearch" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_complaint_id, manage_admin_user_id, order_info_id, config_type_id, channel_product_code_id, 
+    channel_info_id, complaint_state, complaint_time, deal_time, user_mobile, user_province, 
+    complaint_deal_state, complaint_content, complaint_search
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_complaint
+    where user_complaint_id = #{userComplaintId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_complaint
+    where user_complaint_id = #{userComplaintId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.directional.base.entity.UserComplaint" >
+    insert into user_complaint (manage_admin_user_id, order_info_id, config_type_id, 
+      channel_product_code_id, channel_info_id, complaint_state, 
+      complaint_time, deal_time, user_mobile, 
+      user_province, complaint_deal_state, complaint_content, 
+      complaint_search)
+    values (#{manageAdminUserId,jdbcType=BIGINT}, #{orderInfoId,jdbcType=VARCHAR}, #{configTypeId,jdbcType=BIGINT}, 
+      #{channelProductCodeId,jdbcType=BIGINT}, #{channelInfoId,jdbcType=BIGINT}, #{complaintState,jdbcType=INTEGER}, 
+      #{complaintTime,jdbcType=TIMESTAMP}, #{dealTime,jdbcType=TIMESTAMP}, #{userMobile,jdbcType=VARCHAR}, 
+      #{userProvince,jdbcType=VARCHAR}, #{complaintDealState,jdbcType=INTEGER}, #{complaintContent,jdbcType=VARCHAR}, 
+      #{complaintSearch,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.directional.base.entity.UserComplaint" >
+    insert into user_complaint
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      manage_admin_user_id,
+      order_info_id,
+      config_type_id,
+      channel_product_code_id,
+      channel_info_id,
+      complaint_state,
+      complaint_time,
+      deal_time,
+      user_mobile,
+      user_province,
+      complaint_deal_state,
+      complaint_content,
+      complaint_search,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{manageAdminUserId,jdbcType=BIGINT},
+      #{orderInfoId,jdbcType=VARCHAR},
+      #{configTypeId,jdbcType=BIGINT},
+      #{channelProductCodeId,jdbcType=BIGINT},
+      #{channelInfoId,jdbcType=BIGINT},
+      #{complaintState,jdbcType=INTEGER},
+      #{complaintTime,jdbcType=TIMESTAMP},
+      #{dealTime,jdbcType=TIMESTAMP},
+      #{userMobile,jdbcType=VARCHAR},
+      #{userProvince,jdbcType=VARCHAR},
+      #{complaintDealState,jdbcType=INTEGER},
+      #{complaintContent,jdbcType=VARCHAR},
+      #{complaintSearch,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.directional.base.entity.UserComplaint" >
+    update user_complaint
+    <set >
+      <if test="manageAdminUserId != null" >
+        manage_admin_user_id = #{manageAdminUserId,jdbcType=BIGINT},
+      </if>
+      <if test="orderInfoId != null" >
+        order_info_id = #{orderInfoId,jdbcType=VARCHAR},
+      </if>
+      <if test="configTypeId != null" >
+        config_type_id = #{configTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="channelProductCodeId != null" >
+        channel_product_code_id = #{channelProductCodeId,jdbcType=BIGINT},
+      </if>
+      <if test="channelInfoId != null" >
+        channel_info_id = #{channelInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="complaintState != null" >
+        complaint_state = #{complaintState,jdbcType=INTEGER},
+      </if>
+      <if test="complaintTime != null" >
+        complaint_time = #{complaintTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealTime != null" >
+        deal_time = #{dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userMobile != null" >
+        user_mobile = #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userProvince != null" >
+        user_province = #{userProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="complaintDealState != null" >
+        complaint_deal_state = #{complaintDealState,jdbcType=INTEGER},
+      </if>
+      <if test="complaintContent != null" >
+        complaint_content = #{complaintContent,jdbcType=VARCHAR},
+      </if>
+      <if test="complaintSearch != null" >
+        complaint_search = #{complaintSearch,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_complaint_id = #{userComplaintId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.directional.base.entity.UserComplaint" >
+    update user_complaint
+    set manage_admin_user_id = #{manageAdminUserId,jdbcType=BIGINT},
+      order_info_id = #{orderInfoId,jdbcType=VARCHAR},
+      config_type_id = #{configTypeId,jdbcType=BIGINT},
+      channel_product_code_id = #{channelProductCodeId,jdbcType=BIGINT},
+      channel_info_id = #{channelInfoId,jdbcType=BIGINT},
+      complaint_state = #{complaintState,jdbcType=INTEGER},
+      complaint_time = #{complaintTime,jdbcType=TIMESTAMP},
+      deal_time = #{dealTime,jdbcType=TIMESTAMP},
+      user_mobile = #{userMobile,jdbcType=VARCHAR},
+      user_province = #{userProvince,jdbcType=VARCHAR},
+      complaint_deal_state = #{complaintDealState,jdbcType=INTEGER},
+      complaint_content = #{complaintContent,jdbcType=VARCHAR},
+      complaint_search = #{complaintSearch,jdbcType=VARCHAR}
+    where user_complaint_id = #{userComplaintId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.directional.base.mapper.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.directional.base.entity.UserInfo" >
+    <id column="user_mobile" property="userMobile" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="user_pwd" property="userPwd" jdbcType="VARCHAR" />
+    <result column="iccid" property="iccid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_mobile, create_time, user_pwd, iccid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where user_mobile = #{userMobile,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user_info
+    where user_mobile = #{userMobile,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.directional.base.entity.UserInfo" >
+    insert into user_info (user_mobile, create_time, user_pwd, 
+      iccid)
+    values (#{userMobile,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{userPwd,jdbcType=VARCHAR}, 
+      #{iccid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.directional.base.entity.UserInfo" >
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      user_mobile,
+      create_time,
+      user_pwd,
+      iccid,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{userMobile,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+      #{userPwd,jdbcType=VARCHAR},
+      #{iccid,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.directional.base.entity.UserInfo" >
+    update user_info
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userPwd != null" >
+        user_pwd = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="iccid != null" >
+        iccid = #{iccid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_mobile = #{userMobile,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.directional.base.entity.UserInfo" >
+    update user_info
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      user_pwd = #{userPwd,jdbcType=VARCHAR},
+      iccid = #{iccid,jdbcType=VARCHAR}
+    where user_mobile = #{userMobile,jdbcType=VARCHAR}
+  </update>
+</mapper>

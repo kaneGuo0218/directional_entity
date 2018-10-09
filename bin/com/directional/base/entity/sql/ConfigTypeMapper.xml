@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.directional.base.mapper.ConfigTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.directional.base.entity.ConfigType" >
+    <id column="config_type_id" property="configTypeId" jdbcType="BIGINT" />
+    <result column="manage_admin_user_id" property="manageAdminUserId" jdbcType="BIGINT" />
+    <result column="config_type_name" property="configTypeName" jdbcType="VARCHAR" />
+    <result column="config_state" property="configState" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    config_type_id, manage_admin_user_id, config_type_name, config_state, is_delete, 
+    create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from config_type
+    where config_type_id = #{configTypeId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from config_type
+    where config_type_id = #{configTypeId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.directional.base.entity.ConfigType" useGeneratedKeys="true" keyProperty="configTypeId" >
+    insert into config_type (manage_admin_user_id, config_type_name, 
+      config_state, is_delete, create_time
+      )
+    values (#{manageAdminUserId,jdbcType=BIGINT}, #{configTypeName,jdbcType=VARCHAR}, 
+      #{configState,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.directional.base.entity.ConfigType" useGeneratedKeys="true" keyProperty="configTypeId" >
+    insert into config_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      manage_admin_user_id,
+      config_type_name,
+      config_state,
+      is_delete,
+      create_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{manageAdminUserId,jdbcType=BIGINT},
+      #{configTypeName,jdbcType=VARCHAR},
+      #{configState,jdbcType=INTEGER},
+      #{isDelete,jdbcType=INTEGER},
+      #{createTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.directional.base.entity.ConfigType" >
+    update config_type
+    <set >
+      <if test="manageAdminUserId != null" >
+        manage_admin_user_id = #{manageAdminUserId,jdbcType=BIGINT},
+      </if>
+      <if test="configTypeName != null" >
+        config_type_name = #{configTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="configState != null" >
+        config_state = #{configState,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where config_type_id = #{configTypeId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.directional.base.entity.ConfigType" >
+    update config_type
+    set manage_admin_user_id = #{manageAdminUserId,jdbcType=BIGINT},
+      config_type_name = #{configTypeName,jdbcType=VARCHAR},
+      config_state = #{configState,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where config_type_id = #{configTypeId,jdbcType=BIGINT}
+  </update>
+</mapper>

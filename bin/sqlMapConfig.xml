@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "mybatis-3-config.dtd">
+
+<configuration>
+    <!-- - - - - - - 懒加载和缓存 - - - - - - - - - - -->
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+    <!-- - - - - - - - 物理分页拦截器 - - - - - - - -->
+    <plugins>
+        <plugin interceptor="ibator.dialect.tool.ResultSetInterceptor"/>
+        <plugin interceptor="ibator.dialect.tool.StatementInterceptor">
+            <property name="dialect" value="ibator.dialect.MySQLDialect"/>
+        </plugin>
+    </plugins>
+    <!-- - - - - - - 数据库环境配置- - - - - - - - - -->
+    <environments default="environments">
+        <environment id="directional">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://123.59.198.45:3306/directional_flow"/>
+                <property name="username" value="directional"/>
+                <property name="password" value="flow2018"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- - - - - - - -映射文件路径- - - - - - -->
+    <mappers>
+        <mapper resource="com/directional/base/entity/sql/ManageAdminGroupTypeMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/ManageAdminAuthorityMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/OrderAlipayLogMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/UserInfoFlowLogMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/ChannelProductCodeMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/StaticOrderDayMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/SysInfoManageMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/ChannelInfoMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/ManageAdminUserMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/StaticOrderTypeMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/SysVersionMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/UserInfoMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/ManageAdminRoleMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/OrderBillLogMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/ConfigTypeMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/StaticOrderUserdataMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/UserFeedbackMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/UserComplaintContentMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/UserInfoFlowMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/CommonConfigMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/ManageAdminRoleAuthorityMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/AppListMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/ManageAdminUserRoleMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/OrderWechatLogMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/StaticOrderAreaMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/OrderInfoMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/UserComplaintMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/DicProvinceMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/StaticOrderChannelMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/DivVpnIpMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/DicNationalityMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/ChannelConfigInfoMapper.xml"/>
+        <mapper resource="com/directional/base/entity/sql/OrderLogMapper.xml"/>
+    </mappers>
+</configuration>

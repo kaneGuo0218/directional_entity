@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.directional.base.mapper.ChannelProductCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.directional.base.entity.ChannelProductCode" >
+    <id column="channel_product_code_id" property="channelProductCodeId" jdbcType="BIGINT" />
+    <result column="channel_info_id" property="channelInfoId" jdbcType="BIGINT" />
+    <result column="config_type_id" property="configTypeId" jdbcType="BIGINT" />
+    <result column="manage_admin_user_id" property="manageAdminUserId" jdbcType="BIGINT" />
+    <result column="code_content" property="codeContent" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="product_sort" property="productSort" jdbcType="INTEGER" />
+    <result column="product_price" property="productPrice" jdbcType="DECIMAL" />
+    <result column="fee_type" property="feeType" jdbcType="INTEGER" />
+    <result column="fee_days" property="feeDays" jdbcType="INTEGER" />
+    <result column="product_flow" property="productFlow" jdbcType="BIGINT" />
+    <result column="product_ad_desc" property="productAdDesc" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="product_code" property="productCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    channel_product_code_id, channel_info_id, config_type_id, manage_admin_user_id, code_content, 
+    is_delete, product_sort, product_price, fee_type, fee_days, product_flow, product_ad_desc, 
+    create_time, product_code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from channel_product_code
+    where channel_product_code_id = #{channelProductCodeId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from channel_product_code
+    where channel_product_code_id = #{channelProductCodeId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.directional.base.entity.ChannelProductCode" useGeneratedKeys="true" keyProperty="channelProductCodeId" >
+    insert into channel_product_code (channel_info_id, config_type_id, manage_admin_user_id, 
+      code_content, is_delete, product_sort, 
+      product_price, fee_type, fee_days, 
+      product_flow, product_ad_desc, create_time, 
+      product_code)
+    values (#{channelInfoId,jdbcType=BIGINT}, #{configTypeId,jdbcType=BIGINT}, #{manageAdminUserId,jdbcType=BIGINT}, 
+      #{codeContent,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, #{productSort,jdbcType=INTEGER}, 
+      #{productPrice,jdbcType=DECIMAL}, #{feeType,jdbcType=INTEGER}, #{feeDays,jdbcType=INTEGER}, 
+      #{productFlow,jdbcType=BIGINT}, #{productAdDesc,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{productCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.directional.base.entity.ChannelProductCode" useGeneratedKeys="true" keyProperty="channelProductCodeId" >
+    insert into channel_product_code
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      channel_info_id,
+      config_type_id,
+      manage_admin_user_id,
+      code_content,
+      is_delete,
+      product_sort,
+      product_price,
+      fee_type,
+      fee_days,
+      product_flow,
+      product_ad_desc,
+      create_time,
+      product_code,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{channelInfoId,jdbcType=BIGINT},
+      #{configTypeId,jdbcType=BIGINT},
+      #{manageAdminUserId,jdbcType=BIGINT},
+      #{codeContent,jdbcType=VARCHAR},
+      #{isDelete,jdbcType=INTEGER},
+      #{productSort,jdbcType=INTEGER},
+      #{productPrice,jdbcType=DECIMAL},
+      #{feeType,jdbcType=INTEGER},
+      #{feeDays,jdbcType=INTEGER},
+      #{productFlow,jdbcType=BIGINT},
+      #{productAdDesc,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+      #{productCode,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.directional.base.entity.ChannelProductCode" >
+    update channel_product_code
+    <set >
+      <if test="channelInfoId != null" >
+        channel_info_id = #{channelInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="configTypeId != null" >
+        config_type_id = #{configTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="manageAdminUserId != null" >
+        manage_admin_user_id = #{manageAdminUserId,jdbcType=BIGINT},
+      </if>
+      <if test="codeContent != null" >
+        code_content = #{codeContent,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="productSort != null" >
+        product_sort = #{productSort,jdbcType=INTEGER},
+      </if>
+      <if test="productPrice != null" >
+        product_price = #{productPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="feeType != null" >
+        fee_type = #{feeType,jdbcType=INTEGER},
+      </if>
+      <if test="feeDays != null" >
+        fee_days = #{feeDays,jdbcType=INTEGER},
+      </if>
+      <if test="productFlow != null" >
+        product_flow = #{productFlow,jdbcType=BIGINT},
+      </if>
+      <if test="productAdDesc != null" >
+        product_ad_desc = #{productAdDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productCode != null" >
+        product_code = #{productCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where channel_product_code_id = #{channelProductCodeId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.directional.base.entity.ChannelProductCode" >
+    update channel_product_code
+    set channel_info_id = #{channelInfoId,jdbcType=BIGINT},
+      config_type_id = #{configTypeId,jdbcType=BIGINT},
+      manage_admin_user_id = #{manageAdminUserId,jdbcType=BIGINT},
+      code_content = #{codeContent,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      product_sort = #{productSort,jdbcType=INTEGER},
+      product_price = #{productPrice,jdbcType=DECIMAL},
+      fee_type = #{feeType,jdbcType=INTEGER},
+      fee_days = #{feeDays,jdbcType=INTEGER},
+      product_flow = #{productFlow,jdbcType=BIGINT},
+      product_ad_desc = #{productAdDesc,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      product_code = #{productCode,jdbcType=VARCHAR}
+    where channel_product_code_id = #{channelProductCodeId,jdbcType=BIGINT}
+  </update>
+</mapper>

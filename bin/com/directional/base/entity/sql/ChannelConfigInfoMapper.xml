@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.directional.base.mapper.ChannelConfigInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.directional.base.entity.ChannelConfigInfo" >
+    <id column="channel_config_info_id" property="channelConfigInfoId" jdbcType="BIGINT" />
+    <result column="channel_info_id" property="channelInfoId" jdbcType="BIGINT" />
+    <result column="channel_product_code_id" property="channelProductCodeId" jdbcType="BIGINT" />
+    <result column="manage_admin_user_id" property="manageAdminUserId" jdbcType="BIGINT" />
+    <result column="config_type_id" property="configTypeId" jdbcType="BIGINT" />
+    <result column="channel_config_content" property="channelConfigContent" jdbcType="VARCHAR" />
+    <result column="is_used" property="isUsed" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    channel_config_info_id, channel_info_id, channel_product_code_id, manage_admin_user_id, 
+    config_type_id, channel_config_content, is_used, is_delete, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from channel_config_info
+    where channel_config_info_id = #{channelConfigInfoId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from channel_config_info
+    where channel_config_info_id = #{channelConfigInfoId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.directional.base.entity.ChannelConfigInfo" >
+    insert into channel_config_info (channel_info_id, channel_product_code_id, 
+      manage_admin_user_id, config_type_id, channel_config_content, 
+      is_used, is_delete, create_time
+      )
+    values (#{channelInfoId,jdbcType=BIGINT}, #{channelProductCodeId,jdbcType=BIGINT}, 
+      #{manageAdminUserId,jdbcType=BIGINT}, #{configTypeId,jdbcType=BIGINT}, #{channelConfigContent,jdbcType=VARCHAR}, 
+      #{isUsed,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.directional.base.entity.ChannelConfigInfo" >
+    insert into channel_config_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      channel_info_id,
+      channel_product_code_id,
+      manage_admin_user_id,
+      config_type_id,
+      channel_config_content,
+      is_used,
+      is_delete,
+      create_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{channelInfoId,jdbcType=BIGINT},
+      #{channelProductCodeId,jdbcType=BIGINT},
+      #{manageAdminUserId,jdbcType=BIGINT},
+      #{configTypeId,jdbcType=BIGINT},
+      #{channelConfigContent,jdbcType=VARCHAR},
+      #{isUsed,jdbcType=INTEGER},
+      #{isDelete,jdbcType=INTEGER},
+      #{createTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.directional.base.entity.ChannelConfigInfo" >
+    update channel_config_info
+    <set >
+      <if test="channelInfoId != null" >
+        channel_info_id = #{channelInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="channelProductCodeId != null" >
+        channel_product_code_id = #{channelProductCodeId,jdbcType=BIGINT},
+      </if>
+      <if test="manageAdminUserId != null" >
+        manage_admin_user_id = #{manageAdminUserId,jdbcType=BIGINT},
+      </if>
+      <if test="configTypeId != null" >
+        config_type_id = #{configTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="channelConfigContent != null" >
+        channel_config_content = #{channelConfigContent,jdbcType=VARCHAR},
+      </if>
+      <if test="isUsed != null" >
+        is_used = #{isUsed,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where channel_config_info_id = #{channelConfigInfoId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.directional.base.entity.ChannelConfigInfo" >
+    update channel_config_info
+    set channel_info_id = #{channelInfoId,jdbcType=BIGINT},
+      channel_product_code_id = #{channelProductCodeId,jdbcType=BIGINT},
+      manage_admin_user_id = #{manageAdminUserId,jdbcType=BIGINT},
+      config_type_id = #{configTypeId,jdbcType=BIGINT},
+      channel_config_content = #{channelConfigContent,jdbcType=VARCHAR},
+      is_used = #{isUsed,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where channel_config_info_id = #{channelConfigInfoId,jdbcType=BIGINT}
+  </update>
+</mapper>

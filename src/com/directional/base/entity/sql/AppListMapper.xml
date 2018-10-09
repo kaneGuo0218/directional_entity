@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.directional.base.mapper.AppListMapper" >
+  <resultMap id="BaseResultMap" type="com.directional.base.entity.AppList" >
+    <id column="app_version" property="appVersion" jdbcType="VARCHAR" />
+    <result column="app_desc" property="appDesc" jdbcType="VARCHAR" />
+    <result column="app_down_url" property="appDownUrl" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    app_version, app_desc, app_down_url, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from app_list
+    where app_version = #{appVersion,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from app_list
+    where app_version = #{appVersion,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.directional.base.entity.AppList" >
+    insert into app_list (app_version, app_desc, app_down_url, 
+      create_time)
+    values (#{appVersion,jdbcType=VARCHAR}, #{appDesc,jdbcType=VARCHAR}, #{appDownUrl,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.directional.base.entity.AppList" >
+    insert into app_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      app_version,
+      app_desc,
+      app_down_url,
+      create_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{appVersion,jdbcType=VARCHAR},
+      #{appDesc,jdbcType=VARCHAR},
+      #{appDownUrl,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.directional.base.entity.AppList" >
+    update app_list
+    <set >
+      <if test="appDesc != null" >
+        app_desc = #{appDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="appDownUrl != null" >
+        app_down_url = #{appDownUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where app_version = #{appVersion,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.directional.base.entity.AppList" >
+    update app_list
+    set app_desc = #{appDesc,jdbcType=VARCHAR},
+      app_down_url = #{appDownUrl,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where app_version = #{appVersion,jdbcType=VARCHAR}
+  </update>
+</mapper>

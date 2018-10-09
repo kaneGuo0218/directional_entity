@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.directional.base.mapper.DivVpnIpMapper" >
+  <resultMap id="BaseResultMap" type="com.directional.base.entity.DivVpnIp" >
+    <id column="vpn_ip" property="vpnIp" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    vpn_ip, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from div_vpn_ip
+    where vpn_ip = #{vpnIp,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from div_vpn_ip
+    where vpn_ip = #{vpnIp,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.directional.base.entity.DivVpnIp" >
+    insert into div_vpn_ip (vpn_ip, create_time)
+    values (#{vpnIp,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.directional.base.entity.DivVpnIp" >
+    insert into div_vpn_ip
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      vpn_ip,
+      create_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{vpnIp,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.directional.base.entity.DivVpnIp" >
+    update div_vpn_ip
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where vpn_ip = #{vpnIp,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.directional.base.entity.DivVpnIp" >
+    update div_vpn_ip
+    set create_time = #{createTime,jdbcType=TIMESTAMP}
+    where vpn_ip = #{vpnIp,jdbcType=VARCHAR}
+  </update>
+</mapper>

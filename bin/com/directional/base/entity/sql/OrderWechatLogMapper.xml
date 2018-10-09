@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.directional.base.mapper.OrderWechatLogMapper" >
+  <resultMap id="BaseResultMap" type="com.directional.base.entity.OrderWechatLog" >
+    <id column="order_info_id" property="orderInfoId" jdbcType="VARCHAR" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="transaction_id" property="transactionId" jdbcType="VARCHAR" />
+    <result column="nonce_str" property="nonceStr" jdbcType="VARCHAR" />
+    <result column="bank_type" property="bankType" jdbcType="VARCHAR" />
+    <result column="sign" property="sign" jdbcType="VARCHAR" />
+    <result column="fee_type" property="feeType" jdbcType="VARCHAR" />
+    <result column="mch_id" property="mchId" jdbcType="VARCHAR" />
+    <result column="cash_fee" property="cashFee" jdbcType="INTEGER" />
+    <result column="appid" property="appid" jdbcType="VARCHAR" />
+    <result column="total_fee" property="totalFee" jdbcType="INTEGER" />
+    <result column="trade_type" property="tradeType" jdbcType="VARCHAR" />
+    <result column="attach" property="attach" jdbcType="VARCHAR" />
+    <result column="time_end" property="timeEnd" jdbcType="VARCHAR" />
+    <result column="is_subscribe" property="isSubscribe" jdbcType="VARCHAR" />
+    <result column="result_code" property="resultCode" jdbcType="VARCHAR" />
+    <result column="return_code" property="returnCode" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="access_token" property="accessToken" jdbcType="VARCHAR" />
+    <result column="refresh_token" property="refreshToken" jdbcType="VARCHAR" />
+    <result column="expires_in" property="expiresIn" jdbcType="VARCHAR" />
+    <result column="scope" property="scope" jdbcType="VARCHAR" />
+    <result column="unionid" property="unionid" jdbcType="VARCHAR" />
+    <result column="last_commit_orderid" property="lastCommitOrderid" jdbcType="VARCHAR" />
+    <result column="refund_id" property="refundId" jdbcType="VARCHAR" />
+    <result column="out_refund_no" property="outRefundNo" jdbcType="VARCHAR" />
+    <result column="refund_fee" property="refundFee" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.directional.base.entity.OrderWechatLogWithBLOBs" extends="BaseResultMap" >
+    <result column="order_json" property="orderJson" jdbcType="LONGVARCHAR" />
+    <result column="refund_json" property="refundJson" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_info_id, openid, transaction_id, nonce_str, bank_type, sign, fee_type, mch_id, 
+    cash_fee, appid, total_fee, trade_type, attach, time_end, is_subscribe, result_code, 
+    return_code, create_time, access_token, refresh_token, expires_in, `scope`, unionid, 
+    last_commit_orderid, refund_id, out_refund_no, refund_fee
+  </sql>
+  <sql id="Blob_Column_List" >
+    order_json, refund_json
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from order_wechat_log
+    where order_info_id = #{orderInfoId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from order_wechat_log
+    where order_info_id = #{orderInfoId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.directional.base.entity.OrderWechatLogWithBLOBs" >
+    insert into order_wechat_log (order_info_id, openid, transaction_id, 
+      nonce_str, bank_type, sign, 
+      fee_type, mch_id, cash_fee, 
+      appid, total_fee, trade_type, 
+      attach, time_end, is_subscribe, 
+      result_code, return_code, create_time, 
+      access_token, refresh_token, expires_in, 
+      `scope`, unionid, last_commit_orderid, 
+      refund_id, out_refund_no, refund_fee, 
+      order_json, refund_json)
+    values (#{orderInfoId,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{transactionId,jdbcType=VARCHAR}, 
+      #{nonceStr,jdbcType=VARCHAR}, #{bankType,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, 
+      #{feeType,jdbcType=VARCHAR}, #{mchId,jdbcType=VARCHAR}, #{cashFee,jdbcType=INTEGER}, 
+      #{appid,jdbcType=VARCHAR}, #{totalFee,jdbcType=INTEGER}, #{tradeType,jdbcType=VARCHAR}, 
+      #{attach,jdbcType=VARCHAR}, #{timeEnd,jdbcType=VARCHAR}, #{isSubscribe,jdbcType=VARCHAR}, 
+      #{resultCode,jdbcType=VARCHAR}, #{returnCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{accessToken,jdbcType=VARCHAR}, #{refreshToken,jdbcType=VARCHAR}, #{expiresIn,jdbcType=VARCHAR}, 
+      #{scope,jdbcType=VARCHAR}, #{unionid,jdbcType=VARCHAR}, #{lastCommitOrderid,jdbcType=VARCHAR}, 
+      #{refundId,jdbcType=VARCHAR}, #{outRefundNo,jdbcType=VARCHAR}, #{refundFee,jdbcType=INTEGER}, 
+      #{orderJson,jdbcType=LONGVARCHAR}, #{refundJson,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.directional.base.entity.OrderWechatLogWithBLOBs" >
+    insert into order_wechat_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      order_info_id,
+      openid,
+      transaction_id,
+      nonce_str,
+      bank_type,
+      sign,
+      fee_type,
+      mch_id,
+      cash_fee,
+      appid,
+      total_fee,
+      trade_type,
+      attach,
+      time_end,
+      is_subscribe,
+      result_code,
+      return_code,
+      create_time,
+      access_token,
+      refresh_token,
+      expires_in,
+      `scope`,
+      unionid,
+      last_commit_orderid,
+      refund_id,
+      out_refund_no,
+      refund_fee,
+      order_json,
+      refund_json,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{orderInfoId,jdbcType=VARCHAR},
+      #{openid,jdbcType=VARCHAR},
+      #{transactionId,jdbcType=VARCHAR},
+      #{nonceStr,jdbcType=VARCHAR},
+      #{bankType,jdbcType=VARCHAR},
+      #{sign,jdbcType=VARCHAR},
+      #{feeType,jdbcType=VARCHAR},
+      #{mchId,jdbcType=VARCHAR},
+      #{cashFee,jdbcType=INTEGER},
+      #{appid,jdbcType=VARCHAR},
+      #{totalFee,jdbcType=INTEGER},
+      #{tradeType,jdbcType=VARCHAR},
+      #{attach,jdbcType=VARCHAR},
+      #{timeEnd,jdbcType=VARCHAR},
+      #{isSubscribe,jdbcType=VARCHAR},
+      #{resultCode,jdbcType=VARCHAR},
+      #{returnCode,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+      #{accessToken,jdbcType=VARCHAR},
+      #{refreshToken,jdbcType=VARCHAR},
+      #{expiresIn,jdbcType=VARCHAR},
+      #{scope,jdbcType=VARCHAR},
+      #{unionid,jdbcType=VARCHAR},
+      #{lastCommitOrderid,jdbcType=VARCHAR},
+      #{refundId,jdbcType=VARCHAR},
+      #{outRefundNo,jdbcType=VARCHAR},
+      #{refundFee,jdbcType=INTEGER},
+      #{orderJson,jdbcType=LONGVARCHAR},
+      #{refundJson,jdbcType=LONGVARCHAR},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.directional.base.entity.OrderWechatLogWithBLOBs" >
+    update order_wechat_log
+    <set >
+      <if test="openid != null" >
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionId != null" >
+        transaction_id = #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="nonceStr != null" >
+        nonce_str = #{nonceStr,jdbcType=VARCHAR},
+      </if>
+      <if test="bankType != null" >
+        bank_type = #{bankType,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="feeType != null" >
+        fee_type = #{feeType,jdbcType=VARCHAR},
+      </if>
+      <if test="mchId != null" >
+        mch_id = #{mchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cashFee != null" >
+        cash_fee = #{cashFee,jdbcType=INTEGER},
+      </if>
+      <if test="appid != null" >
+        appid = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null" >
+        total_fee = #{totalFee,jdbcType=INTEGER},
+      </if>
+      <if test="tradeType != null" >
+        trade_type = #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="attach != null" >
+        attach = #{attach,jdbcType=VARCHAR},
+      </if>
+      <if test="timeEnd != null" >
+        time_end = #{timeEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="isSubscribe != null" >
+        is_subscribe = #{isSubscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="resultCode != null" >
+        result_code = #{resultCode,jdbcType=VARCHAR},
+      </if>
+      <if test="returnCode != null" >
+        return_code = #{returnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accessToken != null" >
+        access_token = #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="refreshToken != null" >
+        refresh_token = #{refreshToken,jdbcType=VARCHAR},
+      </if>
+      <if test="expiresIn != null" >
+        expires_in = #{expiresIn,jdbcType=VARCHAR},
+      </if>
+      <if test="scope != null" >
+        `scope` = #{scope,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null" >
+        unionid = #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastCommitOrderid != null" >
+        last_commit_orderid = #{lastCommitOrderid,jdbcType=VARCHAR},
+      </if>
+      <if test="refundId != null" >
+        refund_id = #{refundId,jdbcType=VARCHAR},
+      </if>
+      <if test="outRefundNo != null" >
+        out_refund_no = #{outRefundNo,jdbcType=VARCHAR},
+      </if>
+      <if test="refundFee != null" >
+        refund_fee = #{refundFee,jdbcType=INTEGER},
+      </if>
+      <if test="orderJson != null" >
+        order_json = #{orderJson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="refundJson != null" >
+        refund_json = #{refundJson,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where order_info_id = #{orderInfoId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.directional.base.entity.OrderWechatLogWithBLOBs" >
+    update order_wechat_log
+    set openid = #{openid,jdbcType=VARCHAR},
+      transaction_id = #{transactionId,jdbcType=VARCHAR},
+      nonce_str = #{nonceStr,jdbcType=VARCHAR},
+      bank_type = #{bankType,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR},
+      fee_type = #{feeType,jdbcType=VARCHAR},
+      mch_id = #{mchId,jdbcType=VARCHAR},
+      cash_fee = #{cashFee,jdbcType=INTEGER},
+      appid = #{appid,jdbcType=VARCHAR},
+      total_fee = #{totalFee,jdbcType=INTEGER},
+      trade_type = #{tradeType,jdbcType=VARCHAR},
+      attach = #{attach,jdbcType=VARCHAR},
+      time_end = #{timeEnd,jdbcType=VARCHAR},
+      is_subscribe = #{isSubscribe,jdbcType=VARCHAR},
+      result_code = #{resultCode,jdbcType=VARCHAR},
+      return_code = #{returnCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      access_token = #{accessToken,jdbcType=VARCHAR},
+      refresh_token = #{refreshToken,jdbcType=VARCHAR},
+      expires_in = #{expiresIn,jdbcType=VARCHAR},
+      `scope` = #{scope,jdbcType=VARCHAR},
+      unionid = #{unionid,jdbcType=VARCHAR},
+      last_commit_orderid = #{lastCommitOrderid,jdbcType=VARCHAR},
+      refund_id = #{refundId,jdbcType=VARCHAR},
+      out_refund_no = #{outRefundNo,jdbcType=VARCHAR},
+      refund_fee = #{refundFee,jdbcType=INTEGER},
+      order_json = #{orderJson,jdbcType=LONGVARCHAR},
+      refund_json = #{refundJson,jdbcType=LONGVARCHAR}
+    where order_info_id = #{orderInfoId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.directional.base.entity.OrderWechatLog" >
+    update order_wechat_log
+    set openid = #{openid,jdbcType=VARCHAR},
+      transaction_id = #{transactionId,jdbcType=VARCHAR},
+      nonce_str = #{nonceStr,jdbcType=VARCHAR},
+      bank_type = #{bankType,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR},
+      fee_type = #{feeType,jdbcType=VARCHAR},
+      mch_id = #{mchId,jdbcType=VARCHAR},
+      cash_fee = #{cashFee,jdbcType=INTEGER},
+      appid = #{appid,jdbcType=VARCHAR},
+      total_fee = #{totalFee,jdbcType=INTEGER},
+      trade_type = #{tradeType,jdbcType=VARCHAR},
+      attach = #{attach,jdbcType=VARCHAR},
+      time_end = #{timeEnd,jdbcType=VARCHAR},
+      is_subscribe = #{isSubscribe,jdbcType=VARCHAR},
+      result_code = #{resultCode,jdbcType=VARCHAR},
+      return_code = #{returnCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      access_token = #{accessToken,jdbcType=VARCHAR},
+      refresh_token = #{refreshToken,jdbcType=VARCHAR},
+      expires_in = #{expiresIn,jdbcType=VARCHAR},
+      `scope` = #{scope,jdbcType=VARCHAR},
+      unionid = #{unionid,jdbcType=VARCHAR},
+      last_commit_orderid = #{lastCommitOrderid,jdbcType=VARCHAR},
+      refund_id = #{refundId,jdbcType=VARCHAR},
+      out_refund_no = #{outRefundNo,jdbcType=VARCHAR},
+      refund_fee = #{refundFee,jdbcType=INTEGER}
+    where order_info_id = #{orderInfoId,jdbcType=VARCHAR}
+  </update>
+</mapper>

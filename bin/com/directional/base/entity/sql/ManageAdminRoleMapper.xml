@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.directional.base.mapper.ManageAdminRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.directional.base.entity.ManageAdminRole" >
+    <id column="manage_admin_role_id" property="manageAdminRoleId" jdbcType="BIGINT" />
+    <result column="manage_admin_user_id" property="manageAdminUserId" jdbcType="BIGINT" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="admin_group_id" property="adminGroupId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    manage_admin_role_id, manage_admin_user_id, role_name, admin_group_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from manage_admin_role
+    where manage_admin_role_id = #{manageAdminRoleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from manage_admin_role
+    where manage_admin_role_id = #{manageAdminRoleId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.directional.base.entity.ManageAdminRole" useGeneratedKeys="true" keyProperty="manageAdminRoleId" >
+    insert into manage_admin_role (manage_admin_user_id, role_name, admin_group_id
+      )
+    values (#{manageAdminUserId,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR}, #{adminGroupId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.directional.base.entity.ManageAdminRole" useGeneratedKeys="true" keyProperty="manageAdminRoleId" >
+    insert into manage_admin_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      manage_admin_user_id,
+      role_name,
+      admin_group_id,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{manageAdminUserId,jdbcType=BIGINT},
+      #{roleName,jdbcType=VARCHAR},
+      #{adminGroupId,jdbcType=INTEGER},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.directional.base.entity.ManageAdminRole" >
+    update manage_admin_role
+    <set >
+      <if test="manageAdminUserId != null" >
+        manage_admin_user_id = #{manageAdminUserId,jdbcType=BIGINT},
+      </if>
+      <if test="roleName != null" >
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminGroupId != null" >
+        admin_group_id = #{adminGroupId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where manage_admin_role_id = #{manageAdminRoleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.directional.base.entity.ManageAdminRole" >
+    update manage_admin_role
+    set manage_admin_user_id = #{manageAdminUserId,jdbcType=BIGINT},
+      role_name = #{roleName,jdbcType=VARCHAR},
+      admin_group_id = #{adminGroupId,jdbcType=INTEGER}
+    where manage_admin_role_id = #{manageAdminRoleId,jdbcType=BIGINT}
+  </update>
+</mapper>

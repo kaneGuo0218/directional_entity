@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.directional.base.mapper.DicNationalityMapper" >
+  <resultMap id="BaseResultMap" type="com.directional.base.entity.DicNationality" >
+    <id column="dic_nationality_id" property="dicNationalityId" jdbcType="INTEGER" />
+    <result column="nationality_name" property="nationalityName" jdbcType="VARCHAR" />
+    <result column="nationality_en_name" property="nationalityEnName" jdbcType="VARCHAR" />
+    <result column="national_flag_url" property="nationalFlagUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dic_nationality_id, nationality_name, nationality_en_name, national_flag_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dic_nationality
+    where dic_nationality_id = #{dicNationalityId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dic_nationality
+    where dic_nationality_id = #{dicNationalityId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.directional.base.entity.DicNationality" >
+    insert into dic_nationality (dic_nationality_id, nationality_name, 
+      nationality_en_name, national_flag_url)
+    values (#{dicNationalityId,jdbcType=INTEGER}, #{nationalityName,jdbcType=VARCHAR}, 
+      #{nationalityEnName,jdbcType=VARCHAR}, #{nationalFlagUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.directional.base.entity.DicNationality" >
+    insert into dic_nationality
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      dic_nationality_id,
+      nationality_name,
+      nationality_en_name,
+      national_flag_url,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{dicNationalityId,jdbcType=INTEGER},
+      #{nationalityName,jdbcType=VARCHAR},
+      #{nationalityEnName,jdbcType=VARCHAR},
+      #{nationalFlagUrl,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.directional.base.entity.DicNationality" >
+    update dic_nationality
+    <set >
+      <if test="nationalityName != null" >
+        nationality_name = #{nationalityName,jdbcType=VARCHAR},
+      </if>
+      <if test="nationalityEnName != null" >
+        nationality_en_name = #{nationalityEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="nationalFlagUrl != null" >
+        national_flag_url = #{nationalFlagUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dic_nationality_id = #{dicNationalityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.directional.base.entity.DicNationality" >
+    update dic_nationality
+    set nationality_name = #{nationalityName,jdbcType=VARCHAR},
+      nationality_en_name = #{nationalityEnName,jdbcType=VARCHAR},
+      national_flag_url = #{nationalFlagUrl,jdbcType=VARCHAR}
+    where dic_nationality_id = #{dicNationalityId,jdbcType=INTEGER}
+  </update>
+</mapper>

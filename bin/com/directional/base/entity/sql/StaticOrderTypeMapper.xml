@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.directional.base.mapper.StaticOrderTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.directional.base.entity.StaticOrderType" >
+    <id column="config_type_id" property="configTypeId" jdbcType="BIGINT" />
+    <result column="product_type" property="productType" jdbcType="VARCHAR" />
+    <result column="order_count" property="orderCount" jdbcType="INTEGER" />
+    <result column="order_fee" property="orderFee" jdbcType="DECIMAL" />
+    <result column="refund_count" property="refundCount" jdbcType="INTEGER" />
+    <result column="refund_fee" property="refundFee" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    config_type_id, product_type, order_count, order_fee, refund_count, refund_fee, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from static_order_type
+    where config_type_id = #{configTypeId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from static_order_type
+    where config_type_id = #{configTypeId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.directional.base.entity.StaticOrderType" >
+    insert into static_order_type (config_type_id, product_type, order_count, 
+      order_fee, refund_count, refund_fee, 
+      create_time, update_time)
+    values (#{configTypeId,jdbcType=BIGINT}, #{productType,jdbcType=VARCHAR}, #{orderCount,jdbcType=INTEGER}, 
+      #{orderFee,jdbcType=DECIMAL}, #{refundCount,jdbcType=INTEGER}, #{refundFee,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.directional.base.entity.StaticOrderType" >
+    insert into static_order_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      config_type_id,
+      product_type,
+      order_count,
+      order_fee,
+      refund_count,
+      refund_fee,
+      create_time,
+      update_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{configTypeId,jdbcType=BIGINT},
+      #{productType,jdbcType=VARCHAR},
+      #{orderCount,jdbcType=INTEGER},
+      #{orderFee,jdbcType=DECIMAL},
+      #{refundCount,jdbcType=INTEGER},
+      #{refundFee,jdbcType=DECIMAL},
+      #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.directional.base.entity.StaticOrderType" >
+    update static_order_type
+    <set >
+      <if test="productType != null" >
+        product_type = #{productType,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCount != null" >
+        order_count = #{orderCount,jdbcType=INTEGER},
+      </if>
+      <if test="orderFee != null" >
+        order_fee = #{orderFee,jdbcType=DECIMAL},
+      </if>
+      <if test="refundCount != null" >
+        refund_count = #{refundCount,jdbcType=INTEGER},
+      </if>
+      <if test="refundFee != null" >
+        refund_fee = #{refundFee,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where config_type_id = #{configTypeId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.directional.base.entity.StaticOrderType" >
+    update static_order_type
+    set product_type = #{productType,jdbcType=VARCHAR},
+      order_count = #{orderCount,jdbcType=INTEGER},
+      order_fee = #{orderFee,jdbcType=DECIMAL},
+      refund_count = #{refundCount,jdbcType=INTEGER},
+      refund_fee = #{refundFee,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where config_type_id = #{configTypeId,jdbcType=BIGINT}
+  </update>
+</mapper>
